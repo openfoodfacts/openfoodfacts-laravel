@@ -1,0 +1,56 @@
+{
+    "name": "openfoodfacts/openfoodfacts-laravel",
+    "description": "Open Food Facts API wrapper for Laravel",
+    "keywords": [
+        "openfoodfacts",
+        "laravel",
+        "php"
+    ],
+    "homepage": "https://github.com/openfoodfacts/openfoodfacts-laravel",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Eddie Palmans",
+            "email": "eddie@palmans.nl"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.5",
+        "guzzlehttp/guzzle": "^6.3.1|^7.0",
+        "illuminate/support": "5.7.x|5.8.x|^6.0|^7.0",
+        "openfoodfacts/openfoodfacts-php": "^0.2.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.7.*|4.*|5.*",
+        "phpunit/phpunit": "^7.0|^8.4|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "OpenFoodFacts\\Laravel\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OpenFoodFacts\\Laravel\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "OpenFoodFacts\\Laravel\\OpenFoodFactsServiceProvider"
+            ],
+            "aliases": {
+                "OpenFoodFacts": "OpenFoodFacts\\Laravel\\Facades\\OpenFoodFacts"
+            }
+        }
+    }
+}
