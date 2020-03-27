@@ -22,7 +22,7 @@
         "openfoodfacts/openfoodfacts-php": "^0.2.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^3.7.*|4.*|5.*",
+        "orchestra/testbench": "^3.7|4.*|5.*",
         "phpunit/phpunit": "^7.0|^8.4|^9.0"
     },
     "autoload": {
