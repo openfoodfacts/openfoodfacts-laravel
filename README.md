@@ -40,7 +40,7 @@ $collection = OpenFoodFacts::find('Coca Cola Zero');
 
 
 ## Contributing
-
+You're very welcome to contribute. We coordinate on the Open Food Facts slack, on the #PHP channel : https://slack.openfoodfacts.org
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## License
