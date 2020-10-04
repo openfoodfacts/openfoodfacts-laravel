@@ -2,10 +2,10 @@
 
 namespace OpenFoodFacts\Laravel;
 
-use Illuminate\Contracts\Config\Repository;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
+use OpenFoodFacts\Exception\ProductNotFoundException;
 
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
@@ -27,9 +27,13 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             throw new InvalidArgumentException("Argument must represent a barcode");
         }
 
-        $doc = $this->api->getProduct($value);
+        try {
+            $doc = $this->api->getProduct($value);
 
-        return empty($doc->code) ? [] : reset($doc);
+            return empty($doc->code) ? [] : reset($doc);
+        } catch (ProductNotFoundException $notFoundException) {
+            return [];
+        }
     }
 
     public function find($searchterm)
