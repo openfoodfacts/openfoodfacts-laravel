@@ -19,7 +19,7 @@
         "php": ">=7.2.5",
         "guzzlehttp/guzzle": "^6.3.1|^7.0",
         "illuminate/support": "5.7.x|5.8.x|^6.0|^7.0|^8.0",
-        "openfoodfacts/openfoodfacts-php": "^0.2.3"
+        "openfoodfacts/openfoodfacts-php": "^0.2.4"
     },
     "require-dev": {
         "orchestra/testbench": "^3.7|4.*|5.*|6.*",
