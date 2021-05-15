@@ -22,9 +22,5 @@ jobs:
           coverage: none
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-suggest
-      - name: Install NPM dependencies
-        run: npm install
-      - name: Compile assets
-        run: npm run production
       - name: Execute tests
         run: vendor/bin/phpunit --verbose
