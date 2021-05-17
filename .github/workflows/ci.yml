@@ -5,21 +5,33 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
-    name: Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.2', '7.3', '7.4']
+    name: Tests - PHP ${{ matrix.php }} 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Cache dependencies
-        uses: actions/cache@v1
-        with:
-          path: ~/.composer/cache/files
-          key: dependencies-composer-${{ hashFiles('composer.json') }}
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.3
+          php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage: none
+      - name: Report PHP version
+        run: php -v
+      - name: Validate composer.json and composer.lock
+        run: composer validate        
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ matrix.php }}-composer-
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-interaction --no-suggest
       - name: Execute tests
