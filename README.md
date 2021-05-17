@@ -1,7 +1,6 @@
 # Laravel Open Food Facts API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/openfoodfacts/openfoodfacts-laravel.svg?style=flat-square)](https://packagist.org/packages/openfoodfacts/openfoodfacts-laravel)
-[![Build Status](https://img.shields.io/travis/openfoodfacts/openfoodfacts-laravel/master.svg?style=flat-square)](https://travis-ci.org/openfoodfacts/openfoodfacts-laravel)
 [![Code Coverage](https://scrutinizer-ci.com/g/openfoodfacts/openfoodfacts-laravel/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/openfoodfacts/openfoodfacts-laravel/?branch=master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/openfoodfacts/openfoodfacts-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/openfoodfacts/openfoodfacts-laravel)
 

@@ -18,13 +18,14 @@ checks:
         fix_doc_comments: true
 
 build:
-    environment:
-            php:
-                version: 7.2
-    tests:
-        override:
-            -
-                command: vendor/bin/phpunit
-                coverage:
-                    file: build/logs/clover.xml
-                    format: php-clover
+    nodes:
+        analysis:
+            project_setup:
+                override: true
+            tests:
+                override: [php-scrutinizer-run]
+
+tools:
+    external_code_coverage:
+        timeout: 600
+        runs: 3                    
