@@ -15,7 +15,7 @@ class ProductSearchTest extends Base\FacadeTestCase
 
         $this->assertTrue($results->isNotEmpty());
 
-        $results->each(function($arr) {
+        $results->each(function ($arr) {
             $this->assertIsArray($arr);
         });
     }
