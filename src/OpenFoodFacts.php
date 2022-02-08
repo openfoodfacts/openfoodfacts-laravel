@@ -56,7 +56,6 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             $pages = (int)ceil($totalMatches / $pageResults->getPageSize());
 
             $products = $products->concat(iterator_to_array($pageResults));
-
         } while ($page < $pages);
 
         return $products->map(function ($product) {
