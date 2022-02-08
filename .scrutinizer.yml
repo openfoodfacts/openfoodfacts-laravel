@@ -18,6 +18,8 @@ checks:
         fix_doc_comments: true
 
 build:
+    environment:
+        php: 8.0.15
     nodes:
         analysis:
             tests:
