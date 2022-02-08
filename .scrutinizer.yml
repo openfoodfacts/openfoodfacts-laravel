@@ -20,10 +20,9 @@ checks:
 build:
     nodes:
         analysis:
-            project_setup:
-                override: true
             tests:
-                override: [php-scrutinizer-run]
+                override:
+                    - php-scrutinizer-run
 
 tools:
     external_code_coverage:
