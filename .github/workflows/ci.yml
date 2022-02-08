@@ -8,8 +8,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.2', '7.3', '7.4']
-    name: Tests - PHP ${{ matrix.php }} 
+        php: [8.0, 8.1]
+        laravel: [9.*]
+        dependency-version: [prefer-lowest, prefer-stable]
+        include:
+          - laravel: 9.*
+            testbench: 7.*
+    name: Tests - PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -31,10 +36,12 @@ jobs:
           key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: ${{ matrix.php }}-composer-
       - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-interaction --no-progress --no-suggest
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
       - name: Execute tests
         run: vendor/bin/phpunit --verbose --coverage-clover ./build/coverage.clover
-      - name: Downloading scrutinizer ocular.phar
-        run: wget https://scrutinizer-ci.com/ocular.phar
       - name: Uploading code coverage to scrutinize
-        run: php ocular.phar code-coverage:upload --format=php-clover ./build/coverage.clover      
+        uses: sudo-bot/action-scrutinizer@latest
+        with:
+            cli-args: "--format=php-clover build/coverage.clover"

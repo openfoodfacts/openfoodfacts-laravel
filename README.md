@@ -4,7 +4,14 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/openfoodfacts/openfoodfacts-laravel/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/openfoodfacts/openfoodfacts-laravel/?branch=master)
 [![Quality Score](https://img.shields.io/scrutinizer/g/openfoodfacts/openfoodfacts-laravel.svg?style=flat-square)](https://scrutinizer-ci.com/g/openfoodfacts/openfoodfacts-laravel)
 
-This package provides a convenient wrapper to the [Open Food Facts API](https://en.wiki.openfoodfacts.org/API) for Laravel applications (5.7+).
+This package provides a convenient wrapper to the [Open Food Facts API](https://en.wiki.openfoodfacts.org/API) for Laravel applications.
+
+## Requirements
+
+- PHP 8.0+
+- Laravel 9.x
+
+*Legacy support (PHP 7.2+ and Laravel 5.7-8.x) at [v0.2.x](https://github.com/openfoodfacts/openfoodfacts-laravel/tree/v0.2.2).*
 
 ## Installation
 
@@ -34,7 +41,7 @@ Array
 ``` php
 $collection = OpenFoodFacts::find('Coca Cola Zero');
 
-//returns a Illuminate\Support\Collection of arrays with details of each product found
+// returns a Illuminate\Support\Collection of arrays with details of each product found
 ```
 
 
