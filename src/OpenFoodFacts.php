@@ -21,7 +21,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         $this->max_results = $app['config']->get('openfoodfacts.max_results', 1000);
     }
 
-    public function barcode($value)
+    public function barcode(string $value)
     {
         if (empty($value)) {
             throw new InvalidArgumentException("Argument must represent a barcode");
@@ -36,7 +36,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         }
     }
 
-    public function find($searchterm)
+    public function find(string $searchterm)
     {
         if (empty($searchterm)) {
             throw new InvalidArgumentException("Specify a search term to find data for matching products");
