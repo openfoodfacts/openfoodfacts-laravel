@@ -7,6 +7,9 @@ use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use OpenFoodFacts\Exception\ProductNotFoundException;
 
+/**
+ * OpenFoodFacts wrapper implementation class with exposed methods
+ */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
     protected $max_results;
