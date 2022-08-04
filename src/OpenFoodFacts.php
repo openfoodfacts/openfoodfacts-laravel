@@ -11,10 +11,10 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
     protected $max_results;
 
-    public function __construct(Container $app)
+    public function __construct(Container $app, string $geography = null)
     {
         parent::__construct([
-            'geography' =>  $app['config']->get('openfoodfacts.geography'),
+            'geography' =>  $geography ?? $app['config']->get('openfoodfacts.geography'),
             'app' =>  $app['config']->get('app.name'),
         ], $app['cache.store']);
 
