@@ -8,6 +8,9 @@ test_patterns = [
 name = "php"
 enabled = true
 
+  [analyzers.meta]
+  skip_doc_coverage = ["class", "magic", "nonpublic"]
+
 [[transformers]]
 name = "php-cs-fixer"
 enabled = true
