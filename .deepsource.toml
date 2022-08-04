@@ -1,8 +1,15 @@
 version = 1
 
+test_patterns = [
+  "tests/**"
+]
+
 [[analyzers]]
 name = "php"
 enabled = true
+
+  [analyzers.meta]
+  skip_doc_coverage = ["class", "magic", "nonpublic"]
 
 [[transformers]]
 name = "php-cs-fixer"
