@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use OpenFoodFacts\Exception\ProductNotFoundException;
 
+/** @mixin \OpenFoodFacts\Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
     protected $max_results;
@@ -21,7 +22,13 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         $this->max_results = $app['config']->get('openfoodfacts.max_results', 1000);
     }
 
-    public function barcode($value)
+    /**
+     * Find product by barcode
+     *
+     * @param string $value
+     * @return array
+     */
+    public function barcode(string $value): array
     {
         if (empty($value)) {
             throw new InvalidArgumentException("Argument must represent a barcode");
@@ -36,7 +43,13 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         }
     }
 
-    public function find($searchterm)
+    /**
+     * Search products by term
+     *
+     * @param string $searchterm
+     * @return Collection<array>
+     */
+    public function find(string $searchterm): Collection
     {
         if (empty($searchterm)) {
             throw new InvalidArgumentException("Specify a search term to find data for matching products");
