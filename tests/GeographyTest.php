@@ -11,11 +11,13 @@ class GeographyTest extends Base\FacadeTestCase
     /** @test */
     public function it_returns_different_content_based_on_geography_parameter()
     {
+        $barcode = '8714200216964';
+
         $instanceWorld = app()->make(OpenFoodFacts::class);
-        $product_default_content = $instanceWorld->barcode('8714200216964');
+        $product_default_content = $instanceWorld->barcode($barcode);
 
         $instanceNL = app()->make(OpenFoodFacts::class, ['geography' => 'nl']);
-        $product_dutch_content = $instanceNL->barcode('8714200216964');
+        $product_dutch_content = $instanceNL->barcode($barcode);
 
         $this->assertEquals($product_default_content['_id'], $product_dutch_content['_id']);
         $this->assertNotEquals($product_default_content, $product_dutch_content);
