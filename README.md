@@ -1,3 +1,9 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://static.openfoodfacts.org/images/logos/off-logo-horizontal-dark.png?refresh_github_cache=1">
+  <source media="(prefers-color-scheme: light)" srcset="https://static.openfoodfacts.org/images/logos/off-logo-horizontal-light.png?refresh_github_cache=1">
+  <img height="48" src="https://static.openfoodfacts.org/images/logos/off-logo-horizontal-light.svg">
+</picture>
+
 # Laravel Open Food Facts API
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/openfoodfacts/openfoodfacts-laravel.svg?style=flat-square)](https://packagist.org/packages/openfoodfacts/openfoodfacts-laravel)
