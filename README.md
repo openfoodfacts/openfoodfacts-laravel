@@ -58,3 +58,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Third party applications
+If you use this SDK, feel free to open a PR to add your application in this list.
+
+## Authors
