@@ -8,9 +8,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [8.1]
+        php: [8.1, 8.2]
         laravel: [11.*, 10.*, 9.*]
-        dependency-version: [prefer-lowest, prefer-stable]
+        dependency-version: [prefer-stable]
         include:
           - laravel: 11.*
             testbench: 9.*
@@ -44,7 +44,7 @@ jobs:
       - name: Install Composer dependencies
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/phpunit --verbose --coverage-clover ./build/coverage.clover
       - name: Uploading code coverage to scrutinize
