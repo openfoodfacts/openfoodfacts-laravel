@@ -14,10 +14,8 @@ This package provides a convenient wrapper to the [Open Food Facts API](https://
 
 ## Requirements
 
-- PHP 8.0+
-- Laravel 9.x
-
-*Legacy support (PHP 7.2+ and Laravel 5.7-8.x) at [v0.2.x](https://github.com/openfoodfacts/openfoodfacts-laravel/tree/v0.2.2).*
+- PHP 8.1+
+- Laravel 9.x, 10.x, 11.x
 
 ## Installation
 
@@ -26,6 +24,12 @@ You can install the package via composer:
 ```bash
 composer require openfoodfacts/openfoodfacts-laravel
 ```
+
+#### Legacy support
+
+- PHP 8.0 (Laravel <=9.x): `composer require "openfoodfacts/openfoodfacts-laravel:^0.3"`
+- PHP 7.2-7.4.x (Laravel 5.7-8.x): `composer require "openfoodfacts/openfoodfacts-laravel:^0.2"`
+
 
 ## Usage
 
