@@ -5,11 +5,11 @@ includes:
 
 parameters:
   level: 9
-  checkMissingIterableValueType: false
   paths:
     - src
     - tests
   ignoreErrors:
+    - identifier: missingType.iterableValue
     -
       message: "#^Cannot access offset '[a-z.]+' on Illuminate\\\\Contracts\\\\Container\\\\Container.$#"
       path: src/OpenFoodFacts.php
