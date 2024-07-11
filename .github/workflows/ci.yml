@@ -48,6 +48,12 @@ jobs:
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
+      - name: Check quality code
+        env:
+            PHP_CS_FIXER_IGNORE_ENV: 1
+        run: vendor/bin/php-cs-fixer fix --ansi --dry-run --using-cache=no --verbose
+      - name: Execute phpstan
+        run: vendor/bin/phpstan
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-clover ./build/coverage.clover
       - name: Uploading code coverage to scrutinize

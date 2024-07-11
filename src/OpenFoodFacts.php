@@ -5,18 +5,20 @@ namespace OpenFoodFacts\Laravel;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
+use OpenFoodFacts\Api;
+use OpenFoodFacts\Document;
 use OpenFoodFacts\Exception\ProductNotFoundException;
 
-/** @mixin \OpenFoodFacts\Api */
+/** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
-    protected $max_results;
+    protected int $max_results;
 
     public function __construct(Container $app, string $geography = null)
     {
         parent::__construct([
-            'geography' =>  $geography ?? $app['config']->get('openfoodfacts.geography'),
-            'app' =>  $app['config']->get('app.name'),
+            'geography' => $geography ?? $app['config']->get('openfoodfacts.geography'),
+            'app' => $app['config']->get('app.name'),
         ], $app['cache.store']);
 
         $this->max_results = $app['config']->get('openfoodfacts.max_results', 1000);
@@ -31,14 +33,14 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
     public function barcode(string $value): array
     {
         if (empty($value)) {
-            throw new InvalidArgumentException("Argument must represent a barcode");
+            throw new InvalidArgumentException('Argument must represent a barcode');
         }
 
         try {
             $doc = $this->api->getProduct($value);
 
-            return empty($doc->code) ? [] : reset($doc);
-        } catch (ProductNotFoundException $notFoundException) {
+            return empty($doc->code) ? [] : (array) reset($doc);
+        } catch (ProductNotFoundException) {
             return [];
         }
     }
@@ -47,14 +49,15 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
      * Search products by term
      *
      * @param string $searchterm
-     * @return Collection<array>
+     * @return Collection<int, array>
      */
     public function find(string $searchterm): Collection
     {
         if (empty($searchterm)) {
-            throw new InvalidArgumentException("Specify a search term to find data for matching products");
+            throw new InvalidArgumentException('Specify a search term to find data for matching products');
         }
 
+        /** @var Collection<int, Document> $products */
         $products = Collection::make();
         $page = 0;
 
@@ -67,16 +70,18 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             }
 
             $pages = (int)ceil($totalMatches / $pageResults->getPageSize());
+            /** @var Document[] $array */
+            $array = iterator_to_array($pageResults);
 
-            $products = $products->concat(iterator_to_array($pageResults));
+            $products = $products->concat($array);
         } while ($page < $pages);
 
         return $products->map(function ($product) {
-            return reset($product);
+            return (array) reset($product);
         });
     }
 
-    public function __call($method, $parameters)
+    public function __call(string $method, array $parameters): mixed
     {
         return $this->api->$method(...$parameters);
     }
