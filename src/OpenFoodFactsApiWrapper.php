@@ -8,23 +8,20 @@ use Psr\SimpleCache\CacheInterface;
 
 class OpenFoodFactsApiWrapper
 {
-    protected $parameters;
-    protected $cache;
-
     public $api;
 
-    public function __construct(array $parameters, CacheInterface $cache = null)
-    {
-        $this->parameters = $parameters;
-        $this->cache = $cache;
-
-        $this->api = $this->setupApi();
+    public function __construct(
+        protected array $parameters,
+        protected ?CacheInterface $cache = null,
+        string $environment = null
+    ) {
+        $this->api = $this->setupApi($environment);
     }
 
-    protected function setupApi($environment = 'food')
+    protected function setupApi(string $environment = null): Api
     {
         return new Api(
-            $environment,
+            $environment ?? 'food',
             $this->parameters['geography'] ?? 'world',
             null,
             $this->httpClient(),
