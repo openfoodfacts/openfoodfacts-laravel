@@ -8,11 +8,11 @@ use Psr\SimpleCache\CacheInterface;
 
 class OpenFoodFactsApiWrapper
 {
-    public $api;
+    public readonly Api $api;
 
     public function __construct(
-        protected array $parameters,
-        protected ?CacheInterface $cache = null,
+        public readonly array $parameters,
+        protected readonly ?CacheInterface $cache = null,
         string $environment = null
     ) {
         $this->api = $this->setupApi($environment);
@@ -29,7 +29,7 @@ class OpenFoodFactsApiWrapper
         );
     }
 
-    protected function httpClient()
+    protected function httpClient(): Client
     {
         return new Client([
             'headers' => ['User-Agent' => $this->parameters['app'] ?? 'Laravel Open Food Facts - https://github.com/openfoodfacts/openfoodfacts-laravel'],

@@ -9,7 +9,7 @@ use OpenFoodFacts\Laravel\OpenFoodFacts;
 class GeographyTest extends Base\FacadeTestCase
 {
     /** @test */
-    public function it_returns_different_content_based_on_geography_parameter()
+    public function it_returns_different_content_based_on_geography_parameter(): void
     {
         $barcode = '8714200216964';
 
@@ -24,7 +24,7 @@ class GeographyTest extends Base\FacadeTestCase
     }
 
     /** @test */
-    public function it_returns_geo_specific_content_through_config_setting()
+    public function it_returns_geo_specific_content_through_config_setting(): void
     {
         Config::set('openfoodfacts.geography', 'nl');
         $product_dutch_content = OpenFoodFactsFacade::barcode('8714200216964');

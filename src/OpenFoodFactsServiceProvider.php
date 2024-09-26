@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 class OpenFoodFactsServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -16,6 +16,9 @@ class OpenFoodFactsServiceProvider extends ServiceProvider
         }
     }
 
+    /**
+     * @inheritDoc
+     */
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/openfoodfacts.php', 'openfoodfacts');

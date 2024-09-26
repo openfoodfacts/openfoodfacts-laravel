@@ -1,0 +1,15 @@
+includes:
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+  - vendor/larastan/larastan/extension.neon
+
+parameters:
+  level: 9
+  paths:
+    - src
+    - tests
+  ignoreErrors:
+    - identifier: missingType.iterableValue
+    -
+      message: "#^Cannot access offset '[a-z.]+' on Illuminate\\\\Contracts\\\\Container\\\\Container.$#"
+      path: src/OpenFoodFacts.php
