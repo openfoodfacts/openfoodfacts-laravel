@@ -25,7 +25,9 @@ class ProductSearchTest extends Base\FacadeTestCase
     {
         $results = OpenFoodFacts::find('no-such-product-exists');
 
-        $this->assertTrue($results->isEmpty());
+        // Call to method PHPUnit\Framework\Assert::assertTrue() with bool will always evaluate to false.
+        // 💡 Because the type is coming from a PHPDoc
+        $this->assertEquals(true, $results->isEmpty());
     }
 
     /** @test */
