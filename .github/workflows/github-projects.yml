@@ -1,0 +1,112 @@
+name: Add bugs and PRs to the Release Smoothie GitHub Project
+
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+  pull_request:
+    types:
+      - opened
+      - labeled
+jobs:
+  add-to-project:
+    name: Add issue to project
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.actor != 'dependabot[bot]'
+    steps:
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/113 # Add issue to the PHP project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT || github.token }}
+          label-operator: AND
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/36 # Add issue to the Open Pet Food Facts project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🐾 Open Pet Food Facts
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/43 # Add issue to the Open Products Facts project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 📸 Open Products Facts
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/37 # Add issue to the Open Beauty Facts project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🧴 Open Beauty Facts
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/4 # Add issue to the packaging project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 📦 Packaging
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/25 # Add issue to the documentation project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 📚 Documentation
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/5 # Add issue to the Folksonomy project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🏷️ Folksonomy Project
+          label-operator: OR         
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/44 # Add issue to the Data Quality project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🧽 Data quality
+          label-operator: OR    
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/82 # Add issue to the Search project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🔎 Search
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/41 # Add issue to the producer platform project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🏭 Producers Platform
+          label-operator: OR    
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/19 # Add issue to the infrastructure project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: infrastructure
+          label-operator: OR   
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/92 # Add issue to the Nutri-Score project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🚦 Nutri-Score
+          label-operator: OR   
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/132 # Add issue to the Top upvoted issues board
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: ⭐ top issue, 👍 Top 10 Issue!
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/57 # Add issue to the Most impactful issues board
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 🎯 P0, 🎯 P1
+          label-operator: OR
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/105 # Add issue to the Prices project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: 💸 Prices
+          label-operator: OR   
+      - uses: actions/add-to-project@main
+        with:
+          project-url: https://github.com/orgs/openfoodfacts/projects/133 # Add issue to the Releases project
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          labeled: "autorelease:pending"
+          label-operator: OR
