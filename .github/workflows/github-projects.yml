@@ -1,14 +1,16 @@
-name: Add bugs and PRs to the Release Smoothie GitHub Project
+name: Add bugs and PRs to the relevant GitHub Projects
 
 on:
   issues:
     types:
       - opened
       - labeled
+      - edited
   pull_request:
     types:
       - opened
       - labeled
+      - edited
 jobs:
   add-to-project:
     name: Add issue to project
