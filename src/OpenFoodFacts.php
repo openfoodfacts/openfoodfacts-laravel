@@ -39,7 +39,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         try {
             $doc = $this->api->getProduct($value);
 
-            return empty($doc->code) ? [] : (array) reset($doc);
+            return empty($doc->code) ? [] : $doc->getData();
         } catch (ProductNotFoundException) {
             return [];
         }
