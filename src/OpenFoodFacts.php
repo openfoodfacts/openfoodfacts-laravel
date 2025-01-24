@@ -76,16 +76,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             $products = $products->concat($array);
         } while ($page < $pages);
 
-        return $products->map(function ($product) {
-            /**
-             * @var array $value
-             * Just to avoid error from phpstan :
-             * > Method OpenFoodFacts\Laravel\OpenFoodFacts::find() should return Illuminate\Support\Collection<int, array> but returns Illuminate\Support\Collection<int, array{bool}>.
-             */
-            $value = (array) reset($product);
-
-            return $value;
-        });
+        return $products->map(fn ($product) => $product->getData());
     }
 
     public function __call(string $method, array $parameters): mixed
