@@ -47,6 +47,17 @@ Array
 )    
 ```
 
+It's possible to use by environment, like these examples : 
+
+``` php
+$food = OpenFoodFacts::barcode('20203467');
+
+$beauty = OpenBeautyFacts::barcode('8718951087460');
+
+$pet = OpenPetFoodFacts::barcode('8714265000263');
+```
+
+
 #### Find products that match a search term:
 ``` php
 $collection = OpenFoodFacts::find('Coca Cola Zero');
@@ -54,6 +65,14 @@ $collection = OpenFoodFacts::find('Coca Cola Zero');
 // returns a Illuminate\Support\Collection of arrays with details of each product found
 ```
 
+It's also possible to search by environment :
+
+``` php
+$pet = OpenFoodFacts::find('Yarrah');
+$beauty = OpenBeautyFacts::find("Deodorant Alum");
+
+dd($pet, $beauty);
+```
 
 ## Contributing
 You're very welcome to contribute. We coordinate on the Open Food Facts slack, on the #PHP channel : https://slack.openfoodfacts.org
