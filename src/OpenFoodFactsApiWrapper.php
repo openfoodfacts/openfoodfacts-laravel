@@ -21,7 +21,7 @@ class OpenFoodFactsApiWrapper
     protected function setupApi(string $environment = null): Api
     {
         return new Api(
-            $environment ?? 'food',
+            $environment,
             $this->parameters['geography'] ?? 'world',
             null,
             $this->httpClient(),
