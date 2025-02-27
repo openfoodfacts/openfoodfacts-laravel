@@ -22,7 +22,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
                 'app' => $app['config']->get('app.name'),
             ],
             $app['cache.store'],
-            environment: $environment
+            $environment
         );
 
         $this->max_results = $app['config']->get('openfoodfacts.max_results', 1000);
