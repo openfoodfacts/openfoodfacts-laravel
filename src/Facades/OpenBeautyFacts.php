@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Facade;
  *
  * @see \OpenFoodFacts\Laravel\OpenFoodFacts
  */
-class OpenFoodFacts extends Facade
+class OpenBeautyFacts extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -20,6 +20,6 @@ class OpenFoodFacts extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'openfoodfacts';
+        return 'openbeautyfacts';
     }
 }

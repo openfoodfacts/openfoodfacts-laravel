@@ -13,15 +13,15 @@ class OpenFoodFactsApiWrapper
     public function __construct(
         public readonly array $parameters,
         protected readonly ?CacheInterface $cache = null,
-        string $environment = null
+        string $environment = 'food'
     ) {
         $this->api = $this->setupApi($environment);
     }
 
-    protected function setupApi(string $environment = null): Api
+    protected function setupApi(string $environment): Api
     {
         return new Api(
-            $environment ?? 'food',
+            $environment,
             $this->parameters['geography'] ?? 'world',
             null,
             $this->httpClient(),

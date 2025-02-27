@@ -23,8 +23,9 @@ class OpenFoodFactsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/openfoodfacts.php', 'openfoodfacts');
 
-        $this->app->singleton('openfoodfacts', function (Container $app) {
-            return new OpenFoodFacts($app);
-        });
+        // Bindings for each environment
+        $this->app->singleton('openfoodfacts', fn (Container $app) => new OpenFoodFacts($app, environment: 'food'));
+        $this->app->singleton('openbeautyfacts', fn (Container $app) => new OpenFoodFacts($app, environment: 'beauty'));
+        $this->app->singleton('openpetfoodfacts', fn (Container $app) => new OpenFoodFacts($app, environment: 'pet'));
     }
 }
