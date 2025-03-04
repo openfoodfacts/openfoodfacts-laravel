@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static array barcode(string $value)
- * @method static \Illuminate\Support\Collection find(string $searchTerm)
+ * @method static \Illuminate\Support\Collection<int, array> find(string $searchTerm)
  * @method static \OpenFoodFacts\Document getProduct(string $barcode)
  *
  * @see \OpenFoodFacts\Laravel\OpenFoodFacts
