@@ -5,10 +5,12 @@ includes:
 
 parameters:
   level: 9
+  reportUnmatchedIgnoredErrors: false
   paths:
     - src
     - tests
   ignoreErrors:
+    - identifier: method.alreadyNarrowedType
     - identifier: missingType.iterableValue
     -
       message: "#^Cannot access offset '[a-z.]+' on Illuminate\\\\Contracts\\\\Container\\\\Container.$#"

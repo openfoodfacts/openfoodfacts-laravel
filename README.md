@@ -47,6 +47,15 @@ Array
 )    
 ```
 
+... or find in other product databases: 
+
+``` php
+$beauty = OpenBeautyFacts::barcode('8718951087460');
+
+$pet = OpenPetFoodFacts::barcode('8714265000263'); // Note: underlying product database is under construction
+```
+
+
 #### Find products that match a search term:
 ``` php
 $collection = OpenFoodFacts::find('Coca Cola Zero');
@@ -54,6 +63,12 @@ $collection = OpenFoodFacts::find('Coca Cola Zero');
 // returns a Illuminate\Support\Collection of arrays with details of each product found
 ```
 
+Also works with:
+
+``` php
+$pet = OpenPetFoodFacts::find('Yarrah');
+$beauty = OpenBeautyFacts::find("Deodorant Alum");
+```
 
 ## Contributing
 You're very welcome to contribute. We coordinate on the Open Food Facts slack, on the #PHP channel : https://slack.openfoodfacts.org
