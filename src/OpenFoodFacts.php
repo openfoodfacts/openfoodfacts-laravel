@@ -81,13 +81,15 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         } while ($page < $pages);
 
         return $products->map(function ($product) {
+            // SonarQube vs. Phpstan
+            $value = reset($product);
+            $value = (array) $value;
             /**
+             * @var array $value
              * Just to avoid error from phpstan :
              * > Method OpenFoodFacts\Laravel\OpenFoodFacts::find() should return Illuminate\Support\Collection<int, array> but returns Illuminate\Support\Collection<int, array{bool}>.
              */
-
-            return (array) reset($product);
-
+            return $value;
         });
     }
 
