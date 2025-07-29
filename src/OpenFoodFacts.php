@@ -84,6 +84,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             // SonarQube vs. Phpstan
             $value = reset($product);
             $value = (array) $value;
+
             /**
              * @var array $value
              * Just to avoid error from phpstan :
