@@ -82,13 +82,12 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
 
         return $products->map(function ($product) {
             /**
-             * @var array $value
              * Just to avoid error from phpstan :
              * > Method OpenFoodFacts\Laravel\OpenFoodFacts::find() should return Illuminate\Support\Collection<int, array> but returns Illuminate\Support\Collection<int, array{bool}>.
              */
-            $value = (array) reset($product);
 
-            return $value;
+            return (array) reset($product);
+
         });
     }
 
