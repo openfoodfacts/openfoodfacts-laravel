@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.5.0...v0.5.1) (2025-03-04)
+
+
+### Bug Fixes
+
+* remove deprecated ([b92dcc1](https://github.com/openfoodfacts/openfoodfacts-laravel/commit/b92dcc179e24ee74b0f08d8a14b2a3dfd753e8f2))
+
 ## [0.5.0](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.4.0...v0.5.0) (2024-09-26)
 
 

@@ -43,7 +43,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         try {
             $doc = $this->api->getProduct($value);
 
-            return empty($doc->code) ? [] : (array) reset($doc);
+            return empty($doc->code) ? [] : $doc->getData();
         } catch (ProductNotFoundException) {
             return [];
         }
@@ -80,18 +80,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             $products = $products->concat($array);
         } while ($page < $pages);
 
-        return $products->map(function ($product) {
-            // SonarQube vs. Phpstan
-            $value = reset($product);
-            $value = (array) $value;
-
-            /**
-             * @var array $value
-             * Just to avoid error from phpstan :
-             * > Method OpenFoodFacts\Laravel\OpenFoodFacts::find() should return Illuminate\Support\Collection<int, array> but returns Illuminate\Support\Collection<int, array{bool}>.
-             */
-            return $value;
-        });
+        return $products->map(fn ($product) => $product->getData());
     }
 
     public function __call(string $method, array $parameters): mixed
