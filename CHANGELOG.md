@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.5.1...v0.6.0) (2025-08-04)
+
+
+### Features
+
+* Laravel 12.x Compatibility with updated Dependencies & Pipeline ([1c466d0](https://github.com/openfoodfacts/openfoodfacts-laravel/commit/1c466d0bd63a4454ba9b4a60fd6553998ae268c0))
+
 ## [0.5.1](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.5.0...v0.5.1) (2025-03-04)
 
 
