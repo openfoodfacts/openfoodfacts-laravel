@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.6.0...v0.7.0) (2025-08-04)
+
+
+### Features
+
+* Drop Laravel 9 and 10 ([900b9cb](https://github.com/openfoodfacts/openfoodfacts-laravel/commit/900b9cbb9208b6e5a07806acdd64d38d29a1cf83))
+
 ## [0.6.0](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.5.1...v0.6.0) (2025-08-04)
 
 
