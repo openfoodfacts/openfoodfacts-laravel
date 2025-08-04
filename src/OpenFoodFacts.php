@@ -14,7 +14,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
     protected int $max_results;
 
-    public function __construct(Container $app, string $geography = null, string $environment = 'food')
+    public function __construct(Container $app, ?string $geography = null, string $environment = 'food')
     {
         parent::__construct(
             [
