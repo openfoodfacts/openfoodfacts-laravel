@@ -20,7 +20,7 @@ checks:
 build:
     image: default-bionic
     environment:
-        php: 8.1.2
+        php: 8.2.29
     nodes:
         analysis:
             tests:
@@ -30,4 +30,4 @@ build:
 tools:
     external_code_coverage:
         timeout: 600
-        runs: 3                    
+        runs: 3
