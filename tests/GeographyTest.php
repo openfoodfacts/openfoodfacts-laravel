@@ -5,10 +5,11 @@ namespace OpenFoodFacts\Laravel\Tests;
 use Illuminate\Support\Facades\Config;
 use OpenFoodFacts\Laravel\Facades\OpenFoodFacts as OpenFoodFactsFacade;
 use OpenFoodFacts\Laravel\OpenFoodFacts;
+use PHPUnit\Framework\Attributes\Test;
 
-class GeographyTest extends Base\FacadeTestCase
+final class GeographyTest extends Base\FacadeTestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_different_content_based_on_geography_parameter(): void
     {
         $barcode = '8714200216964';
@@ -23,7 +24,7 @@ class GeographyTest extends Base\FacadeTestCase
         $this->assertNotEquals($product_default_content, $product_dutch_content);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_geo_specific_content_through_config_setting(): void
     {
         Config::set('openfoodfacts.geography', 'nl');

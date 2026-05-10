@@ -3,17 +3,18 @@
 namespace OpenFoodFacts\Laravel\Tests;
 
 use OpenFoodFacts\Laravel\Facades\OpenFoodFacts;
+use PHPUnit\Framework\Attributes\Test;
 
-class BarcodeFindTest extends Base\FacadeTestCase
+final class BarcodeFindTest extends Base\FacadeTestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_an_array_with_data_when_product_found(): void
     {
         $arr = OpenFoodFacts::barcode('0737628064502');
         $this->assertArrayHasKey('code', $arr);
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_an_empty_array_when_product_not_found(): void
     {
         $arr = OpenFoodFacts::barcode('this-barcode-does-not-exist');
@@ -21,7 +22,7 @@ class BarcodeFindTest extends Base\FacadeTestCase
         $this->assertEquals([], $arr);
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_argument_empty(): void
     {
         $this->expectException('InvalidArgumentException');
