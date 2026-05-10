@@ -4,10 +4,11 @@ namespace OpenFoodFacts\Laravel\Tests;
 
 use OpenFoodFacts\Document;
 use OpenFoodFacts\Laravel\Facades\OpenFoodFacts;
+use PHPUnit\Framework\Attributes\Test;
 
-class FacadeBridgeToApiTest extends Base\FacadeTestCase
+final class FacadeBridgeToApiTest extends Base\FacadeTestCase
 {
-    /** @test */
+    #[Test]
     public function it_calls_method_on_vendor_apiclass(): void
     {
         $doc = OpenFoodFacts::getProduct('0737628064502');
