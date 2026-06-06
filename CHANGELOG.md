@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.8.0](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.7.0...v0.8.0) (2026-06-06)
+
+
+### Features
+
+* Add Laravel 13 support ([4fc1cd2](https://github.com/openfoodfacts/openfoodfacts-laravel/commit/4fc1cd25cc9b24feb9b4f8786e87f97f8b876d5b))
+* Add Laravel 13 support ([43db2f8](https://github.com/openfoodfacts/openfoodfacts-laravel/commit/43db2f8c16827734dd6bfd79784713fcf3d910e0))
+* Add Laravel 13 support ([48e5b7d](https://github.com/openfoodfacts/openfoodfacts-laravel/commit/48e5b7d5a4e8bafd22bce1de47f538674e7d5a26))
+
 ## [0.7.0](https://github.com/openfoodfacts/openfoodfacts-laravel/compare/v0.6.0...v0.7.0) (2025-08-04)
 
 
