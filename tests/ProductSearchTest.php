@@ -3,10 +3,11 @@
 namespace OpenFoodFacts\Laravel\Tests;
 
 use OpenFoodFacts\Laravel\Facades\OpenFoodFacts;
+use PHPUnit\Framework\Attributes\Test;
 
-class ProductSearchTest extends Base\FacadeTestCase
+final class ProductSearchTest extends Base\FacadeTestCase
 {
-    /** @test */
+    #[Test]
     public function it_returns_a_laravelcollection_with_arrays(): void
     {
         $results = OpenFoodFacts::find('Stir-Fry Rice Noodles');
@@ -20,17 +21,15 @@ class ProductSearchTest extends Base\FacadeTestCase
         });
     }
 
-    /** @test */
+    #[Test]
     public function it_returns_an_empty_laravelcollection_when_no_results_found(): void
     {
         $results = OpenFoodFacts::find('no-such-product-exists');
 
-        // Call to method PHPUnit\Framework\Assert::assertTrue() with bool will always evaluate to false.
-        // 💡 Because the type is coming from a PHPDoc
         $this->assertEquals(true, $results->isEmpty());
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_on_too_many_results(): void
     {
         $this->expectException('Exception');
@@ -38,7 +37,7 @@ class ProductSearchTest extends Base\FacadeTestCase
         OpenFoodFacts::find('cola');
     }
 
-    /** @test */
+    #[Test]
     public function it_throws_an_exception_when_argument_empty(): void
     {
         $this->expectException('InvalidArgumentException');
