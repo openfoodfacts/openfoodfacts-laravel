@@ -13,7 +13,7 @@ use OpenFoodFacts\Exception\ProductNotFoundException;
 /** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
-    const MAX_RETRIES = 5;
+    public const MAX_RETRIES = 5;
     protected int $max_results;
 
     public function __construct(Container $app, ?string $geography = null, string $environment = 'food')
