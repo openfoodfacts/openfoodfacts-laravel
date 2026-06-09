@@ -85,6 +85,10 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             } while ($errorInResponse && $retries <= self::MAX_RETRIES);
             $retries = 0;
 
+            if ($errorInResponse) {
+                throw new \Exception("ERROR: Failed to retrieve data after {$retries} retries.");
+            }
+
 
             $totalMatches = $pageResults->searchCount();
 
