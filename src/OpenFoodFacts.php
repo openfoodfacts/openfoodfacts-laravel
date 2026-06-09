@@ -9,7 +9,9 @@ use InvalidArgumentException;
 use OpenFoodFacts\Api;
 use OpenFoodFacts\Document;
 use OpenFoodFacts\Exception\BadRequestException;
+use OpenFoodFacts\Exception\InvalidParameterException;
 use OpenFoodFacts\Exception\ProductNotFoundException;
+use OpenFoodFacts\Exception\UnknownException;
 
 /** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
@@ -87,14 +89,14 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             $retries = 0;
 
             if ($errorInResponse) {
-                throw new \Exception("ERROR: Failed to retrieve data after {$retries} retries.");
+                throw new UnknownException("ERROR: Failed to retrieve data after {$retries} retries.");
             }
 
 
             $totalMatches = $pageResults->searchCount();
 
             if ($this->max_results > 0 && $totalMatches > $this->max_results) {
-                throw new \Exception("ERROR: {$totalMatches} results found, while buffer limited to {$this->max_results}. Please narrow your search.");
+                throw new InvalidParameterException("ERROR: {$totalMatches} results found, while buffer limited to {$this->max_results}. Please narrow your search.");
             }
 
             $pages = (int)ceil($totalMatches / $pageResults->getPageSize());

@@ -2,6 +2,8 @@
 
 namespace OpenFoodFacts\Laravel\Tests;
 
+use Illuminate\Support\Collection;
+use OpenFoodFacts\Exception\UnknownException;
 use OpenFoodFacts\Laravel\Facades\OpenFoodFacts;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -10,15 +12,20 @@ final class ProductSearchTest extends Base\FacadeTestCase
     #[Test]
     public function it_returns_a_laravelcollection_with_arrays(): void
     {
-        $results = OpenFoodFacts::find('Stir-Fry Rice Noodles');
+        try {
+            $results = OpenFoodFacts::find('Stir-Fry Rice Noodles');
+            $this->assertInstanceOf(Collection::class, $results);
 
-        $this->assertInstanceOf(\Illuminate\Support\Collection::class, $results);
+            $this->assertTrue($results->isNotEmpty());
 
-        $this->assertTrue($results->isNotEmpty());
+            $results->each(function ($arr) {
+                $this->assertIsArray($arr);
+            });
+        } catch (UnknownException) {
+            $this->markTestSkipped('Skipping as we test against live servers');
+        }
 
-        $results->each(function ($arr) {
-            $this->assertIsArray($arr);
-        });
+
     }
 
     #[Test]
