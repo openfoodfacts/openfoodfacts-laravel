@@ -21,6 +21,7 @@ class OpenFoodFactsApiWrapper
     protected function setupApi(string $environment): Api
     {
         return new Api(
+            $this->getUserAgent(),
             $environment,
             $this->parameters['geography'] ?? 'world',
             null,
@@ -32,7 +33,12 @@ class OpenFoodFactsApiWrapper
     protected function httpClient(): Client
     {
         return new Client([
-            'headers' => ['User-Agent' => $this->parameters['app'] ?? 'Laravel Open Food Facts - https://github.com/openfoodfacts/openfoodfacts-laravel'],
+            'headers' => ['User-Agent' => $this->getUserAgent()],
         ]);
+    }
+
+    private function getUserAgent(): string
+    {
+        return $this->parameters['app'] ?? 'Laravel Open Food Facts - https://github.com/openfoodfacts/openfoodfacts-laravel';
     }
 }

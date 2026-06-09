@@ -2,16 +2,21 @@
 
 namespace OpenFoodFacts\Laravel;
 
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use OpenFoodFacts\Api;
 use OpenFoodFacts\Document;
+use OpenFoodFacts\Exception\BadRequestException;
+use OpenFoodFacts\Exception\InvalidParameterException;
 use OpenFoodFacts\Exception\ProductNotFoundException;
+use OpenFoodFacts\Exception\UnknownException;
 
 /** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
+    public const MAX_RETRIES = 5;
     protected int $max_results;
 
     public function __construct(Container $app, ?string $geography = null, string $environment = 'food')
@@ -64,13 +69,34 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         /** @var Collection<int, Document> $products */
         $products = Collection::make();
         $page = 0;
+        $errorInResponse = false;
+        $retries = 0;
 
         do {
-            $pageResults = $this->api->search($searchterm, ++$page, 100);
+
+            //Add exponential backoff as service may return 503 to prevent overload
+            do {
+
+                try {
+                    $pageResults = $this->api->search($searchterm, ++$page, 100);
+                    $errorInResponse = false;
+                } catch (ServerException|BadRequestException $e) {
+                    $errorInResponse = true;
+                    $retries++;
+                    sleep(2 ** $retries);
+                }
+            } while ($errorInResponse && $retries <= self::MAX_RETRIES);
+            $retries = 0;
+
+            if ($errorInResponse) {
+                throw new UnknownException("ERROR: Failed to retrieve data after {$retries} retries.");
+            }
+
+
             $totalMatches = $pageResults->searchCount();
 
             if ($this->max_results > 0 && $totalMatches > $this->max_results) {
-                throw new \Exception("ERROR: {$totalMatches} results found, while buffer limited to {$this->max_results}. Please narrow your search.");
+                throw new InvalidParameterException("ERROR: {$totalMatches} results found, while buffer limited to {$this->max_results}. Please narrow your search.");
             }
 
             $pages = (int)ceil($totalMatches / $pageResults->getPageSize());
