@@ -2,6 +2,7 @@
 
 namespace OpenFoodFacts\Laravel;
 
+use GuzzleHttp\Exception\ServerException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 use InvalidArgumentException;
@@ -12,6 +13,7 @@ use OpenFoodFacts\Exception\ProductNotFoundException;
 /** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
 {
+    const MAX_RETRIES = 5;
     protected int $max_results;
 
     public function __construct(Container $app, ?string $geography = null, string $environment = 'food')
@@ -64,9 +66,26 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
         /** @var Collection<int, Document> $products */
         $products = Collection::make();
         $page = 0;
+        $errorInResponse = false;
+        $retries = 0;
 
         do {
-            $pageResults = $this->api->search($searchterm, ++$page, 100);
+
+            //Add exponential backoff as service may return 503 to prevent overload
+            do {
+
+                try {
+                    $pageResults = $this->api->search($searchterm, ++$page, 100);
+                    $errorInResponse = false;
+                } catch (ServerException $e) {
+                    $errorInResponse = true;
+                    $retries++;
+                    sleep(2 ** $retries);
+                }
+            } while ($errorInResponse && $retries <= self::MAX_RETRIES);
+            $retries = 0;
+
+
             $totalMatches = $pageResults->searchCount();
 
             if ($this->max_results > 0 && $totalMatches > $this->max_results) {
