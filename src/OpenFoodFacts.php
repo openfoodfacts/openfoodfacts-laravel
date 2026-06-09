@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use InvalidArgumentException;
 use OpenFoodFacts\Api;
 use OpenFoodFacts\Document;
+use OpenFoodFacts\Exception\BadRequestException;
 use OpenFoodFacts\Exception\ProductNotFoundException;
 
 /** @mixin Api */
@@ -77,7 +78,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
                 try {
                     $pageResults = $this->api->search($searchterm, ++$page, 100);
                     $errorInResponse = false;
-                } catch (ServerException $e) {
+                } catch (ServerException|BadRequestException $e) {
                     $errorInResponse = true;
                     $retries++;
                     sleep(2 ** $retries);
