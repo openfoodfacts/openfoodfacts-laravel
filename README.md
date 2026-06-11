@@ -15,7 +15,7 @@ This package provides a convenient wrapper to the [Open Food Facts API](https://
 ## Requirements
 
 - PHP 8.1+
-- Laravel 9.x, 10.x, 11.x
+- Laravel 9.x, 10.x, 11.x, 12.x, 13.x
 
 ## Installation
 
