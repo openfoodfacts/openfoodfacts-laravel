@@ -70,6 +70,17 @@ $pet = OpenPetFoodFacts::find('Yarrah');
 $beauty = OpenBeautyFacts::find("Deodorant Alum");
 ```
 
+## Caching
+
+API responses are cached using your application's cache. By default, cached responses expire after one hour.
+You can change this behaviour in your `.env` file (or publish the config file with `php artisan vendor:publish --provider="OpenFoodFacts\Laravel\OpenFoodFactsServiceProvider"`):
+
+```dotenv
+OPENFOODFACTS_CACHE_ENABLED=true   # set to false to disable caching
+OPENFOODFACTS_CACHE_STORE=redis    # cache store to use (defaults to your default store)
+OPENFOODFACTS_CACHE_TTL=3600       # lifetime in seconds
+```
+
 ## Contributing
 You're very welcome to contribute. We coordinate on the Open Food Facts slack, on the #PHP channel : https://slack.openfoodfacts.org
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
