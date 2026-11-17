@@ -8,6 +8,8 @@ use InvalidArgumentException;
 use OpenFoodFacts\Api;
 use OpenFoodFacts\Document;
 use OpenFoodFacts\Exception\ProductNotFoundException;
+use OpenFoodFacts\Laravel\Cache\DefaultTtlCache;
+use Psr\SimpleCache\CacheInterface;
 
 /** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
@@ -21,11 +23,27 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
                 'geography' => $geography ?? $app['config']->get('openfoodfacts.geography'),
                 'app' => $app['config']->get('app.name'),
             ],
-            $app['cache.store'],
+            self::resolveCache($app),
             $environment
         );
 
         $this->max_results = $app['config']->get('openfoodfacts.max_results', 1000);
+    }
+
+    protected static function resolveCache(Container $app): ?CacheInterface
+    {
+        $config = $app['config'];
+
+        if (! filter_var($config->get('openfoodfacts.cache.enabled', true), FILTER_VALIDATE_BOOLEAN)) {
+            return null;
+        }
+
+        $ttl = $config->get('openfoodfacts.cache.ttl', 3600);
+
+        return new DefaultTtlCache(
+            $app['cache']->store($config->get('openfoodfacts.cache.store')),
+            $ttl === null ? null : (int)$ttl
+        );
     }
 
     /**
