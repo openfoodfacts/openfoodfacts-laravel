@@ -2,6 +2,7 @@
 
 namespace OpenFoodFacts\Laravel\Tests;
 
+use OpenFoodFacts\Laravel\Exceptions\TooManyResultsException;
 use OpenFoodFacts\Laravel\Facades\OpenFoodFacts;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -32,7 +33,8 @@ final class ProductSearchTest extends Base\FacadeTestCase
     #[Test]
     public function it_throws_an_exception_on_too_many_results(): void
     {
-        $this->expectException('Exception');
+        $this->expectException(TooManyResultsException::class);
+        $this->expectExceptionMessageMatches('/^ERROR: \d+ results found, while buffer limited to 1000\. Please narrow your search\.$/');
 
         OpenFoodFacts::find('cola');
     }

@@ -70,6 +70,19 @@ $pet = OpenPetFoodFacts::find('Yarrah');
 $beauty = OpenBeautyFacts::find("Deodorant Alum");
 ```
 
+If the number of matching products exceeds the `max_results` config value (default: `1000`, set to `0` to disable the limit),
+an `OpenFoodFacts\Laravel\Exceptions\TooManyResultsException` is thrown:
+
+``` php
+use OpenFoodFacts\Laravel\Exceptions\TooManyResultsException;
+
+try {
+    $collection = OpenFoodFacts::find('cola');
+} catch (TooManyResultsException $e) {
+    // $e->totalMatches, $e->maxResults
+}
+```
+
 ## Contributing
 You're very welcome to contribute. We coordinate on the Open Food Facts slack, on the #PHP channel : https://slack.openfoodfacts.org
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
