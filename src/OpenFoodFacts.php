@@ -8,6 +8,7 @@ use InvalidArgumentException;
 use OpenFoodFacts\Api;
 use OpenFoodFacts\Document;
 use OpenFoodFacts\Exception\ProductNotFoundException;
+use OpenFoodFacts\Laravel\Exceptions\TooManyResultsException;
 
 /** @mixin Api */
 class OpenFoodFacts extends OpenFoodFactsApiWrapper
@@ -70,7 +71,7 @@ class OpenFoodFacts extends OpenFoodFactsApiWrapper
             $totalMatches = $pageResults->searchCount();
 
             if ($this->max_results > 0 && $totalMatches > $this->max_results) {
-                throw new \Exception("ERROR: {$totalMatches} results found, while buffer limited to {$this->max_results}. Please narrow your search.");
+                throw new TooManyResultsException($totalMatches, $this->max_results);
             }
 
             $pages = (int)ceil($totalMatches / $pageResults->getPageSize());
