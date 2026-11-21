@@ -42,7 +42,7 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
-        "phpstan": "vendor/bin/phpunit -c phpstan.neon.dist"
+        "phpstan": "vendor/bin/phpstan"
     },
     "config": {
         "sort-packages": true
